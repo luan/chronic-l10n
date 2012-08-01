@@ -9,7 +9,7 @@ Chronic L10n aims to add translations to [Chronics](https://github.com/mojombo/c
 
 ## INSTALLATION
 
-*WARNING*: This gem will only work when [this fork](https://github.com/luan/chronic) of chronic gets merged and released.
+*WARNING*: This gem will only work when and **IF** [this fork](https://github.com/luan/chronic) of chronic gets merged and released.
 Meanwhile you can install the [chronic](https://github.com/luan/chronic) gem from the forks source to get it going.
 
 ### RubyGems
