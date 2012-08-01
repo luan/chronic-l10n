@@ -2,7 +2,7 @@ require 'chronic'
 
 module Chronic
   module L10n
-    VERSION = "0.0.1.pre"
+    VERSION = "0.0.1.pre.1"
 
     class << self
     end

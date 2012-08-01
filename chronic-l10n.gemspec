@@ -5,8 +5,8 @@ require 'chronic-l10n'
 Gem::Specification.new do |s|
   s.name = 'chronic-l10n'
   s.version = Chronic::L10n::VERSION
-  s.summary     = 'Localization for Chronic'
-  s.description = 'Localization for Chronic'
+  s.summary     = 'Localization for Chronic.'
+  s.description = 'Pack of locales for localizing Chronics date parsing.'
   s.authors  = ['Luan Santos']
   s.email    = ['luan@luansantos.com']
   s.homepage = 'http://github.com/luan/chronic-l10n'
@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.test_files = `git ls-files -- test`.split("\n")
 
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'chronic'
   s.add_development_dependency 'minitest'
+  s.add_dependency 'chronic', '>= 0.7.0'
 end

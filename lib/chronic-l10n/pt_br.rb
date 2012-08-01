@@ -36,8 +36,8 @@ module Chronic
   module L10n
     PT_BR = {
       :pointer => {
-        /\bpassado\b/ => :past,
-        /\b(?:futuro|em)\b/ => :future,
+        /\bpassad[oa]\b/ => :past,
+        /\b(?:futuro|em|que vem)\b/ => :future,
       },
       :ordinal_regex => /^(\d*)[oa]$/,
       :numerizer => {
@@ -47,7 +47,7 @@ module Chronic
           [/e mei[ao]/, 'meia'] # take the 'a' out so it doesn't turn into a 1, save the half for the end
         ],
         :fractional => [
-          [/(\d+)(?: |-)*mei[ao]/i, proc { ($1.to_f + 0.5).to_s }]
+          [/(\d+)(?: |-)*mei[ao]/i, '\1:30']
         ],
         :direct_nums => [
           ['onze', '11'],
@@ -148,11 +148,11 @@ module Chronic
         :units => {
           /^anos?$/ => :year,
           /^estacoes?$/ => :season,
-          /^meses?$/ => :month,
+          /^mes(es)?$/ => :month,
           /^quinzenas?$/ => :fortnight,
           /^semanas?$/ => :week,
           /^fi(m|ns) de semanas?$/ => :weekend,
-          /^dias? uteis?$/ => :weekday,
+          /^dias? ut(il|eis)$/ => :weekday,
           /^dias?$/ => :day,
           /^hrs?$/ => :hour,
           /^horas?$/ => :hour,
@@ -179,20 +179,20 @@ module Chronic
           [/\bhoje\b/, 'este dia'],
           [/\bamanha\b/, 'proximo dia'],
           [/\bontem\b/, 'ultimo dia'],
+          [/\b(\w+) (?:anterior|passad[ao])\b/, 'ultimo \1'],
+          [/\b(\w+) (?:futuro|que vem)\b/, 'proximo \1'],
           [/\bmeio[- ]dia\b/, '12:00pm'],
           [/\bmeia[- ]noite\b/, '24:00'],
           [/\bagora\b/, 'este segundo'],
-          [/\b(?:atras)\b/, 'passado'],
-          [/\beste (?:ultimo|passado)\b/, 'ultimo'],
           [/\b(?:da|de) (madrugada|manha)\b/, '\1'],
           [/\b(?:da|de|a) (tarde|noite)\b/, '\1'],
           [/\bhoje a noite\b/, 'esta noite'],
           [/\b\d+:?\d*[ap]\b/,'\0m'],
           [/(\d)([ap]m)\b/, '\1 \2'],
           [/(\d)(?:h|em ponto)\b/, '\1:00'],
-          [/\b(depois|de agora)\b/, 'futuro'],
-          [/^\s?an? /i, '1 '],
-          [/\b(\d+) de (\w)\b/, '\2 \1']
+          [/\b(?:daqui a|daqui|depois)\b/, 'futuro'],
+          [/\b(?:antes|atras)\b/, 'passado'],
+          [/\b(\d+) de (\w+)\b/, '\2 \1']
         ]
       },
 
