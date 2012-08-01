@@ -3,11 +3,14 @@ Chronic
 
 ## DESCRIPTION
 
-Chronic is a natural language date/time parser written in pure Ruby. See below
-for the wide variety of formats Chronic-L10n will parse.
+[Chronic](https://github.com/mojombo/chronic) is a natural language date/time parser written in pure Ruby.
+Chronic L10n aims to add translations to [Chronics](https://github.com/mojombo/chronic) abilities.
 
 
 ## INSTALLATION
+
+*WARNING*: This gem will only work when [this fork](https://github.com/luan/chronic) of chronic gets merged and released.
+Meanwhile you can install the [chronic](https://github.com/luan/chronic) gem from the forks source to get it going.
 
 ### RubyGems
 
