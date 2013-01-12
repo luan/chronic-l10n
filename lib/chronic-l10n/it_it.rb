@@ -139,14 +139,14 @@ module Chronic
           /^pms?$/ => :pm,
           /^mattin[ae]$/ => :morning,
           /^pomeriggio|(dopo pranzo)$/ => :afternoon,
-          /^sera|cena|tardi?$/ => :evening,
-          /^notte|(dopo cena)?$/ => :night
+          /^sera|cena|tardi$/ => :evening,
+          /^notte|(dopo cena)$/ => :night
         },
         :units => {
           /^ann[oi]$/ => :year,
           /^stagion[ei]$/ => :season,
           /^mes[ei]$/ => :month,
-          /^settiman[ae]?$/ => :week,
+          /^settiman[ae]$/ => :week,
           /^weekend|(fine settimana)$/ => :weekend,
           /^(giorno)? feriale$/ => :weekday,
           /^giorn[oi]$/ => :day,
@@ -155,7 +155,7 @@ module Chronic
           /^mins?$/ => :minute,
           /^minut[oi]$/ => :minute,
           /^secs?$/ => :second,
-          /^second[oi]?$/ => :second
+          /^second[oi]$/ => :second
         }
       },
 
@@ -174,36 +174,38 @@ module Chronic
           [/(?:^|\s)0(\d+:\d+\s*pm?\b)/, ' \1'],
           [/\boggi\b/, 'questo giorno'],
           [/\bdomani\b/, 'prossimo giorno'],
-          [/\bdopodomani\b/, 'prossimo prossimo giorno'],
+          [/\bdopodomani\b/, 'tra 2 giorni'],
           [/\bieri\b/, 'ultimo giorno'],
           [/\bmezza\b/, '12:30pm'],
           [/\bmezzogiorno\b/, '12:00pm'],
           [/\bmezzanotte\b/, '24:00'],
-          [/\b(\w+) (?:ultim[oa]|passat[ao])\b/, 'ultimo \1'],
-          [/\b(\w+) (?:prossim[oa])\b/, 'proximo \1'],
+          #[/\b(\w+) (?:ultim[oa]|passat[ao])\b/, 'ultimo \1'],
+          #[/\b(\w+) (?:prossim[oa])\b/, 'proximo \1'],
           [/\badesso\b/, 'questo secondo'],
-          [/\b(?:in|nella) (mattin[oa]|mattinata|pomeriggio|sera|notte)\b/, '\1'],
+          [/\b(?:di|del(la)?) (mattin[oa]|mattinata|notte)\b/, 'am'],
+          [/\b(?:di|del(la)|nel(la)?) (pomeriggio)\b/, 'pm'],
+          #[/\b(?:in|nella|di|del(la)?) (mattin[oa]|mattinata|pomeriggio|sera|notte)\b/, '\1'],
           [/\bstamattina\b/, 'questa mattina'],
           [/\bstasera\b/, 'questa sera'],
           [/\bstanotte\b/, 'questa notte'],
-          [/\b\d+:?\d*[ap]\b/,'\0m'],
-          [/(\d)([ap]m)\b/, '\1 \2'],
+          #[/\b\d+:?\d*[ap]\b/,'\0m'],
+          #[/(\d)([ap]m)\b/, '\1 \2'],
           #[/(\d)(?:h|em ponto)\b/, '\1:00'],
           [/\b(?:tra|da qui a)\b/, 'prossimo'],
           [/\b(?:prima (di)?)\b/, 'scorso'],
-          [/\b(\d+) de (\w+)\b/, '\2 \1']
+          #[/\b(\d+) de (\w+)\b/, '\2 \1']
         ]
       },
 
       :grabber => {
-        /ultim[aoie]|scors[oaie]/ => :last,
+        /ultim[aoie]|scors[oaie]|passat[ao]/ => :last,
         /quest[aeoi]/ => :this,
         /prossim[aoei]/ => :next
       },
 
       :token => {
         :comma => /^,$/,
-        :at => /^(a|al(l[aeo])?|nel(l[aeo])?|@)$/,
+        :at => /^((all[eao])|nel(l[aeo])?|@)$/,
         :in => /^tra|in$/,
         :on => /^on$/
       }
