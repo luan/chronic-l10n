@@ -9,5 +9,8 @@ module Chronic
 
     require 'chronic-l10n/pt_br'
     Chronic.add_locale :'pt-BR', Chronic::L10n::PT_BR
+
+    require 'chronic-l10n/it_it'
+    Chronic.add_locale :'it-IT', Chronic::L10n::IT_IT
   end
 end
