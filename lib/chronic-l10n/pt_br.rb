@@ -173,7 +173,7 @@ module Chronic
           [/\bsegundo (de|dia|mes|hora|ninuto|segundo)\b/, '2nd \1']
         ],
         :pos_numerize => [
-          [/ \-(\d{4})\b/, ' tzminus\1'],
+          [/\-(\d{2}:?\d{2})\b/, 'tzminus\1'],
           [/([\/\-\,\@])/, ' \1 '],
           [/(?:^|\s)0(\d+:\d+\s*pm?\b)/, ' \1'],
           [/\bhoje\b/, 'este dia'],
@@ -206,7 +206,8 @@ module Chronic
         :comma => /^,$/,
         :at => /^(as|@)$/,
         :in => /^em$/,
-        :on => /^em$/
+        :on => /^em$/,
+        :and => /^e$/
       }
     }
   end
