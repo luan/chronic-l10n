@@ -34,23 +34,11 @@ class TestParsingItIt < TestCase
     time = parse_now("28 di maggio", :context => :past)
     assert_equal Time.local(2006, 5, 28, 12), time
 
-    #time = parse_now("28 maggio alle 5pm", :context => :past)
-    #assert_equal Time.local(2006, 5, 28, 17), time
+    time = parse_now("28 maggio alle 5pm", :context => :past)
+    assert_equal Time.local(2006, 5, 28, 17), time
 
     time = parse_now("28 maggio alle 17", :context => :future)
     assert_equal Time.local(2007, 5, 28, 17), time
-
-    #time = parse_now("28 de maio as 5 da tarde", :context => :past)
-    #assert_equal Time.local(2006, 5, 28, 17), time
-
-    #time = parse_now("28 de maio as 5:32.19pm", :context => :past)
-    #assert_equal Time.local(2006, 5, 28, 17, 32, 19), time
-
-    #time = parse_now("5pm maggio 28")
-    #assert_equal Time.local(2007, 5, 28, 17), time
-
-    #time = parse_now("17, 28 maggio")
-    #assert_equal Time.local(2007, 5, 28, 17), time
 
     time = parse_now("5 maggio 28", :ambiguous_time_range => :none)
     assert_equal Time.local(2007, 5, 28, 05), time
@@ -60,8 +48,8 @@ class TestParsingItIt < TestCase
     time = parse_now("domani")
     assert_equal Time.local(2006, 8, 17, 12), time
 
-    #time = parse_now("dopodomani")
-    #assert_equal Time.local(2006, 8, 18, 12), time
+    time = parse_now("dopodomani")
+    assert_equal Time.local(2006, 8, 18, 14), time
 
     time = parse_now("ieri")
     assert_equal Time.local(2006, 8, 15, 12), time
@@ -71,12 +59,6 @@ class TestParsingItIt < TestCase
 
     time = parse_now("venerdi")
     assert_equal Time.local(2006, 8, 18, 12), time
-
-    time = parse_now("venerdì")
-    assert_equal Time.local(2006, 8, 18, 12), time
-
-    #time = parse_now("vinte e um de agosto")
-    #assert_equal Time.local(2006, 8, 21, 12), time
   end
 
   def test_day_portions
@@ -100,31 +82,12 @@ class TestParsingItIt < TestCase
     time = parse_now("prossima domenica alle 19")
     assert_equal Time.local(2006, 8, 20, 19), time
 
-    #time = parse_now("proxima quarta 1 da manha")
-    #assert_equal Time.local(2006, 8, 23, 1), time
-
-    #time = parse_now("terça passada 5 da tarde")
-    #assert_equal Time.local(2006, 8, 15, 17), time
   end
 
   def test_relative_times
     time = parse_now("tra 7 ore")
     assert_equal Time.local(2006, 8, 16, 21), time
 
-    time = parse_now("da qui a 7 ore")
-    assert_equal Time.local(2006, 8, 16, 21), time
-
-    #time = parse_now("5 horas atras")
-    #assert_equal Time.local(2006, 8, 16, 9), time
-
-    #time = parse_now("5 horas antes")
-    #assert_equal Time.local(2006, 8, 16, 9), time
-
-    #time = parse_now("2 horas depois do meio dia")
-    #assert_equal Time.local(2006, 8, 16, 14), time
-
-    time = parse_now("30 minuti prima di mezzanotte")
-    assert_equal Time.local(2006, 8, 16, 23, 30), time
   end
 
   def test_relative_dates

@@ -37,9 +37,9 @@ module Chronic
     IT_IT = {
       :pointer => {
         /\bpassat[oa]|scors[oa]\b/ => :past,
-        /\b(?:prossim[oa]|successiv[oa])\b/ => :future,
+        /\bprossim[oaei]|successiv[oaei]|futur[oi]\b/ => :future,
       },
-      :ordinal_regex => /^(\d*)$/,
+      :ordinal_regex => /^(\d*)[oa]$/,
       :numerizer => {
         :and => 'e',
         :preprocess => [
@@ -47,7 +47,7 @@ module Chronic
           [/e mezz[ao]/, 'mezZzo'] # take the 'a' out so it doesn't turn into a 1, save the half for the end
         ],
         :fractional => [
-          [/(\d+)(?: | and |-)*mezZzo/i, proc { ($1.to_f + 0.5).to_s }]
+            [/(\d+)(?: |-)*mezZzo/i, '\1:30']
         ],
         :direct_nums => [
           ['undici', '11'],
@@ -179,21 +179,18 @@ module Chronic
           [/\bmezza\b/, '12:30pm'],
           [/\bmezzogiorno\b/, '12:00pm'],
           [/\bmezzanotte\b/, '24:00'],
-          #[/\b(\w+) (?:ultim[oa]|passat[ao])\b/, 'ultimo \1'],
-          #[/\b(\w+) (?:prossim[oa])\b/, 'proximo \1'],
           [/\badesso\b/, 'questo secondo'],
           [/\b(?:di|del(la)?) (mattin[oa]|mattinata|notte)\b/, 'am'],
           [/\b(?:di|del(la)|nel(la)?) (pomeriggio)\b/, 'pm'],
-          #[/\b(?:in|nella|di|del(la)?) (mattin[oa]|mattinata|pomeriggio|sera|notte)\b/, '\1'],
           [/\bstamattina\b/, 'questa mattina'],
           [/\bstasera\b/, 'questa sera'],
           [/\bstanotte\b/, 'questa notte'],
-          #[/\b\d+:?\d*[ap]\b/,'\0m'],
-          #[/(\d)([ap]m)\b/, '\1 \2'],
-          #[/(\d)(?:h|em ponto)\b/, '\1:00'],
-          [/\b(?:tra|da qui a)\b/, 'prossimo'],
+          [/\b\d+:?\d*[ap]\b/,'\0m'],
+          [/(\d)([ap]m)\b/, '\1 \2'],
+          [/\balle (19|20|21|22|23)/, '\1:00'],
           [/\b(?:prima (di)?)\b/, 'scorso'],
-          #[/\b(\d+) de (\w+)\b/, '\2 \1']
+          [/\b(tra) (\w+)\b/,'futuro \2'],
+          [/\b(\w+) (prossim[ao]|ultim[aoie]|scors[oaie]|passat[oa])/, '\2 \1']
         ]
       },
 
@@ -206,7 +203,7 @@ module Chronic
       :token => {
         :comma => /^,$/,
         :at => /^((all[eao])|nel(l[aeo])?|@)$/,
-        :in => /^tra|in$/,
+        :in => /^in$/,
         :on => /^on$/
       }
     }
